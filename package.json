@@ -1,0 +1,23 @@
+{
+  "name": "sb-lookup",
+  "version": "1.0.0",
+  "description": "Convert SponsorBlock UUIDs to requiredSegments Links",
+  "main": "dist/convert.js",
+  "scripts": {
+    "build": "uglifyjs src/convert.js -o dist/convert.js -c -m",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mchangrh/sb-lookup.git"
+  },
+  "author": "Michael Chang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mchangrh/sb-lookup/issues"
+  },
+  "homepage": "https://github.com/mchangrh/sb-lookup#readme",
+  "dependencies": {
+    "uglifyjs": "^2.4.11"
+  }
+}
