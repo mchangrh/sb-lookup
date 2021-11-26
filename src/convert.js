@@ -21,9 +21,9 @@ const redirect = (url) => new Response(url, {
 async function handleRequest(request) {
   const { pathname, searchParams } = new URL(request.url)
   const UUID = pathname.substring(1)
-  const redir = searchParams.get('redir')
+  const api = searchParams.get('api')
   const data = await getData(UUID)
   const { videoID, startTime } = data[0]
   const newURL = `https://www.youtube.com/watch?v=${videoID}&t=${Math.max(0, startTime.toFixed(0)-2)}s#requiredSegment=${UUID}`
-  return (redir) ? redirect(newURL) : new Response(newURL)
+  return (api) ? new Response(newURL) : redirect(newURL)
 }
