@@ -20,10 +20,22 @@ const redirect = (url) => new Response(url, {
 
 async function handleRequest(request) {
   const { pathname, searchParams } = new URL(request.url)
-  const UUID = pathname.substring(1)
+  const pathArr = pathname.split("/").filter(x => x)
+  let newURL
+  const length = pathArr.length
+
+  if (length === 0) {
+    return redirect("https://github.com/mchangrh/sb-lookup")
+  } else if (length === 1) {
+    const UUID = pathArr[0]
+    const data = await getData(UUID)
+    const { videoID, startTime } = data[0]
+    newURL = `https://www.youtube.com/watch?v=${videoID}&t=${Math.max(0, startTime.toFixed(0)-2)}s#requiredSegment=${UUID}`
+  } else if (length === 2) {
+    const [ videoID, UUID ] = pathArr
+    newURL = `https://www.youtube.com/watch?v=${videoID}#requiredSegment=${UUID}`
+  }
+  // return
   const api = searchParams.get('api')
-  const data = await getData(UUID)
-  const { videoID, startTime } = data[0]
-  const newURL = `https://www.youtube.com/watch?v=${videoID}&t=${Math.max(0, startTime.toFixed(0)-2)}s#requiredSegment=${UUID}`
   return (api) ? new Response(newURL) : redirect(newURL)
 }
