@@ -4,7 +4,7 @@
   "description": "Convert SponsorBlock UUIDs to requiredSegments Links",
   "main": "dist/convert.js",
   "scripts": {
-    "build": "uglifyjs src/convert.js -o dist/convert.js -c -m",
+    "build": "uglifyjs -cm src/convert.js -o dist/convert.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/mchangrh/sb-lookup#readme",
   "dependencies": {
-    "uglifyjs": "^2.4.11"
+    "uglify-js": "^3.16.3"
   }
 }
