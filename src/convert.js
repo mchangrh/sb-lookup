@@ -30,7 +30,7 @@ const fetchData = (UUID) => fetch(`${apiURL}?UUID=${UUID}`)
 
 async function handleRequest(request) {
   const { pathname, searchParams } = new URL(request.url)
-  const pathArr = pathname.split("/")
+  const pathArr = pathname.split("/").filter(x => x)
   let newURL
   const length = pathArr.length
   if (length === 0) return redirect("https://github.com/mchangrh/sb-lookup")
