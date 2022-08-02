@@ -18,7 +18,7 @@ function handleInvalidUUID(uuid) {
     "abuse": "https://mchangrh.github.io/sb-tools-index/sponsorblock.png",
     "ports": "https://docs.google.com/spreadsheets/d/1vxSx06dPs_X3WCCC0bMztmlxbg_ETzAmp7sL70HFIew/edit",
     "index": "https://github.com/mchangrh/sb-tools-index#readme",
-    "flowchart": "https://raw.githubusercontent.com/cole8888/SponsorBlock-Flowchart/main/SB_Flowchart_large.png",
+    "flowchart": "https://raw.githubusercontent.com/cole8888/SponsorBlock-Flowchart/main/SB_Flowchart_large.png"
   }
   const link = customLinks?.[uuid]
   return link ? redirect(link) : new Response(`Invalid UUID: ${uuid}`, { status: 400 });
@@ -37,7 +37,7 @@ async function handleRequest(request) {
   else if (length === 1) {
     const UUID = pathArr[0]
     if (!UUID.match(/[a-f0-9]{64,65}/)) return handleInvalidUUID(UUID)
-    const data = await fetchData()
+    const data = await fetchData(UUID)
     if (!data) return new Response(null, { status: 404 })
     const { videoID, startTime } = data[0]
     newURL = `https://www.youtube.com/watch?v=${videoID}&t=${Math.max(0, startTime.toFixed(0)-2)}s#requiredSegment=${UUID}`
