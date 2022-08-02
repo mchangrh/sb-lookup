@@ -4,7 +4,7 @@
   "description": "Convert SponsorBlock UUIDs to requiredSegments Links",
   "main": "dist/convert.js",
   "scripts": {
-    "build": "uglifyjs -cm src/convert.js -o dist/convert.js",
+    "build": "uglifyjs src/convert.js -cmo dist/convert.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
