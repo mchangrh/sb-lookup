@@ -19,7 +19,8 @@ function handleInvalidUUID(uuid) {
     "ports": "https://docs.google.com/spreadsheets/d/1vxSx06dPs_X3WCCC0bMztmlxbg_ETzAmp7sL70HFIew/edit",
     "index": "https://github.com/mchangrh/sb-tools-index#readme",
     "flowchart": "https://raw.githubusercontent.com/cole8888/SponsorBlock-Flowchart/main/SB_Flowchart_large.png",
-    "status": "https://i.imgur.com/K6UQNMJ.png"
+    "status": "https://i.imgur.com/K6UQNMJ.png",
+    "id": "https://mchangrh.github.io/sb-idgen/",
   }
   const link = customLinks?.[uuid]
   return link ? redirect(link) : new Response(`Invalid UUID: ${uuid}`, { status: 400 });
