@@ -28,7 +28,7 @@ function handleInvalidUUID(uuid) {
 
 const fetchData = (UUID) => fetch(`${apiURL}?UUID=${UUID}`)
   .then(res => res.json())
-  .catch(null)
+  .catch(err => null)
 
 async function handleRequest(request) {
   const { pathname, searchParams } = new URL(request.url)
