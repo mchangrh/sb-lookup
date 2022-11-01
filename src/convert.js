@@ -41,8 +41,9 @@ async function handleRequest(request) {
     if (!UUID.match(/[a-f0-9]{64,65}/)) return handleInvalidUUID(UUID)
     const data = await fetchData(UUID)
     if (!data) return new Response(null, { status: 404 })
-    const { videoID, startTime } = data[0]
-    const timeParam = startTime > 0 ? `t=${Math.floor(startTime)}s` : ""
+    let { videoID, startTime } = data[0]
+    startTime -=2
+    const timeParam = startTime > 0 ? `&t=${Math.floor(startTime)}s` : ""
     newURL = `https://www.youtube.com/watch?v=${videoID}${timeParam}#requiredSegment=${UUID}`
   } else if (length === 2) {
     const [UUID, option] = pathArr
