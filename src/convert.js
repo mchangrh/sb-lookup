@@ -34,7 +34,7 @@ const fetchData = (UUID) => fetch(`${apiURL}?UUID=${UUID}`)
 
 function createLink(videoID, UUID, time) {
   const startTime = Number(time) - 2
-  const timeParam = startTime > 0 ? `t=${Math.floor(startTime)}s` : ""
+  const timeParam = startTime > 0 ? `&t=${Math.floor(startTime)}s` : ""
   return `https://www.youtube.com/watch?v=${videoID}${timeParam}#requiredSegment=${UUID}`
 }
 

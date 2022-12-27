@@ -2,6 +2,6 @@ name: Deploy
 on: [push, workflow_dispatch]
 jobs:
   deploy:
-    uses: mchangrh/actions/.github/workflows/cf-worker.yml@main
+    uses: mchangrh/actions/.github/workflows/cf-worker-2.yml@main
     secrets:
       CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
