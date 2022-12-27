@@ -1,5 +1,7 @@
 // consts
 const apiURL = "https://sponsor.ajay.app/api/segmentInfo"
+const uuidRegex = new RegExp(/^[a-f0-9]{64,65}$/)
+const videoRegex = new RegExp(/^[a-zA-Z0-9_-]{11}$/)
 
 addEventListener("fetch", event =>
   event.respondWith(
@@ -30,6 +32,12 @@ const fetchData = (UUID) => fetch(`${apiURL}?UUID=${UUID}`)
   .then(res => res.json())
   .catch(err => null)
 
+function createLink(videoID, UUID, time) {
+  const startTime = Number(time) - 2
+  const timeParam = startTime > 0 ? `t=${Math.floor(startTime)}s` : ""
+  return `https://www.youtube.com/watch?v=${videoID}${timeParam}#requiredSegment=${UUID}`
+}
+
 async function handleRequest(request) {
   const { pathname, searchParams } = new URL(request.url)
   const pathArr = pathname.split("/").filter(x => x)
@@ -38,12 +46,15 @@ async function handleRequest(request) {
   if (length === 0) return redirect("https://github.com/mchangrh/sb-lookup")
   else if (length === 1) {
     const UUID = pathArr[0]
-    if (!UUID.match(/[a-f0-9]{64,65}/)) return handleInvalidUUID(UUID)
+    if (!UUID.match(uuidRegex)) return handleInvalidUUID(UUID)
     const data = await fetchData(UUID)
     if (!data) return new Response(null, { status: 404 })
     const { videoID, startTime } = data[0]
-    const timeParam = startTime > 0 ? `t=${Math.floor(startTime)}s` : ""
-    newURL = `https://www.youtube.com/watch?v=${videoID}${timeParam}s#requiredSegment=${UUID}`
+    newURL = createLink(videoID, UUID, startTime)
+  } else if (length === 2 && pathArr[0].match(videoRegex)) {
+    // /videoID/UUID short link
+    const [videoID, UUID] = pathArr
+    newURL = createLink(videoID, UUID, 0)
   } else if (length === 2) {
     const [UUID, option] = pathArr
     // video | db | info
@@ -58,6 +69,10 @@ async function handleRequest(request) {
     } else {
       return new Response("invalid option, please use db, info, or video", { status: 400 })
     }
+  } else if (length === 3 && pathArr[0].match(videoRegex)) {
+    // /videoID/UUID/time short link
+    const [videoID, UUID, time] = pathArr
+    newURL = createLink(videoID, UUID, time)
   } else {
     return new Response("invalid path", { status: 400 })
   }
