@@ -16,4 +16,12 @@ https://sb.mchang.xyz/:videoID/:UUID/?:time/?api=false
  - `db` - redirects to sb.ltn.fi uuid page
 api: if truthy, return json instead of redirect
 
+DeArrow
+```
+https://sb.mchang.xyz/:videoID
+https://sb.mchang.xyz/oembed/:videoID
+```
+`videoID`: 11 character youtube videoID
+`/oembed`: replica of youtube oembed API with DeArrow replacement
+
 API is licenced under CC BY-NC-SA 4.0 https://sponsor.ajay.app
