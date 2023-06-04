@@ -70,7 +70,10 @@ async function generateDeArrowHTML (videoID) {
 <meta http-equiv="refresh" content="0; url=https://www.youtube.com/watch?v=${videoID}" />
 </head>
 </html>`
-  return new Response(result, { headers: { "content-type": "text/html" } })
+  return new Response(result, { headers: {
+    "content-type": "text/html",
+    "refresh": "0; url=https://www.youtube.com/watch?v=" + videoID,
+  } })
 }
 
 async function handleRequest(request) {
