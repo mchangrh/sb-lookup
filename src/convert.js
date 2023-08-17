@@ -52,7 +52,7 @@ async function getDeArrow (videoID) {
   const timestamp = data.thumbnails?.[0]?.timestamp
   const thumbnail = timestamp
     ? `https://dearrow-thumb.ajay.app/api/v1/getThumbnail?videoID=${videoID}&time=${timestamp}`
-    : `https://i.ytimg.com/vi/${videoID}/maxresdefault.jpg`
+    : `https://i.ytimg.com/vi/${videoID}/hqdefault.jpg`
   const title = data.titles?.[0]?.title ?? ytData.title
   return { title, thumbnail, ytData }
 }
